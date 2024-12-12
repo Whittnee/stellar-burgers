@@ -18,9 +18,12 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
   onOrderClick,
   closeOrderModal
 }) => (
-  <section className={styles.burger_constructor}>
+  <section data-testid='constructor' className={styles.burger_constructor}>
     {constructorItems.bun ? (
-      <div className={`${styles.element} mb-4 mr-4`}>
+      <div
+        data-testid='constructorElement'
+        className={`${styles.element} mb-4 mr-4`}
+      >
         <ConstructorElement
           type='top'
           isLocked
@@ -57,7 +60,10 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
       )}
     </ul>
     {constructorItems.bun ? (
-      <div className={`${styles.element} mt-4 mr-4`}>
+      <div
+        data-testid='constructorElement'
+        className={`${styles.element} mt-4 mr-4`}
+      >
         <ConstructorElement
           type='bottom'
           isLocked
