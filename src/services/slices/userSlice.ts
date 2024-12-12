@@ -1,15 +1,13 @@
 import {
-  forgotPasswordApi,
   getOrdersApi,
   getUserApi,
   loginUserApi,
   logoutApi,
   registerUserApi,
-  resetPasswordApi,
   TLoginData,
   TRegisterData,
   updateUserApi
-} from '@api';
+} from '../../utils/burger-api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TOrder, TUser } from '@utils-types';
 import { RootState } from '../store';
@@ -39,16 +37,6 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-export const forgotPassword = createAsyncThunk(
-  'password/forgot',
-  forgotPasswordApi
-);
-
-export const resetPassword = createAsyncThunk(
-  'password/reset',
-  resetPasswordApi
-);
-
 export const logoutUser = createAsyncThunk('user/logut', async () => {
   const info = await logoutApi();
   if (info.success) {
@@ -60,7 +48,7 @@ export const logoutUser = createAsyncThunk('user/logut', async () => {
 
 export const getOrders = createAsyncThunk('orders/getAll', getOrdersApi);
 
-export const getUser = createAsyncThunk('uset/get', getUserApi);
+export const getUser = createAsyncThunk('user/get', getUserApi);
 
 export const updateUser = createAsyncThunk('user/update', updateUserApi);
 
