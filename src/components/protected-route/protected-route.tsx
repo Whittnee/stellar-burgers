@@ -18,7 +18,6 @@ export const ProtectedRoute = ({
   const isAuthChecked = useSelector(selectIsAuthChecked);
   const isAuthenticated = useSelector(selectisAuthenticated);
   const location = useLocation();
-  console.log(isAuthChecked);
 
   if (!isAuthChecked) {
     return <Preloader />;
@@ -28,7 +27,7 @@ export const ProtectedRoute = ({
     return <Navigate replace to='/login' state={{ from: location }} />;
   }
 
-  if (onlyUnAuth && isAuthenticated) {
+  if (isAuthenticated && onlyUnAuth) {
     const from = location.state?.from || { pathname: '/' };
     return <Navigate replace to={from} />;
   }

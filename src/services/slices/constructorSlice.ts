@@ -1,4 +1,4 @@
-import { orderBurgerApi } from '@api';
+import { orderBurgerApi } from '../../utils/burger-api';
 import {
   createAsyncThunk,
   createSlice,
@@ -22,7 +22,7 @@ interface ConstructorState {
   orderModalData: TOrder | null;
 }
 
-const initialState: ConstructorState = {
+export const initialState: ConstructorState = {
   constructorItems: {
     bun: null,
     ingredients: []
@@ -57,6 +57,14 @@ const constructorSlice = createSlice({
     resetConstructor(state) {
       state.orderModalData = null;
       state.orderRequest = false;
+    },
+    moveConstructorIngredient(
+      state,
+      action: PayloadAction<{ from: number; to: number }>
+    ) {
+      const { from, to } = action.payload;
+      const [ingredient] = state.constructorItems.ingredients.splice(from, 1);
+      state.constructorItems.ingredients.splice(to, 0, ingredient);
     }
   },
   extraReducers: (builder) => {
@@ -80,8 +88,12 @@ const constructorSlice = createSlice({
 });
 
 export default constructorSlice.reducer;
-export const { addIngredient, removeIngredient, resetConstructor } =
-  constructorSlice.actions;
+export const {
+  addIngredient,
+  removeIngredient,
+  resetConstructor,
+  moveConstructorIngredient
+} = constructorSlice.actions;
 
 export const selectConstructorItems = (state: RootState) =>
   state.constructorSlice.constructorItems;
